@@ -1,3 +1,8 @@
+import os
+import matplotlib
+# Configurar Matplotlib para ejecutarse sin interfaz gráfica (Headless)
+matplotlib.use('Agg')
+
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
@@ -5,8 +10,15 @@ import seaborn as sns
 # Configuración del estilo gráfico
 sns.set_theme(style="whitegrid")
 
-# 1. Carga y limpieza inicial de datos
-df = pd.read_csv('/Users/rene.cortes/Downloads/Top-Películas.csv')
+# 1. Carga y limpieza inicial de datos (usando ruta relativa)
+file_path = 'Top-Películas.csv'
+
+if not os.path.exists(file_path):
+    raise FileNotFoundError(
+        f"El archivo '{file_path}' no se encuentra en la raíz del proyecto."
+    )
+
+df = pd.read_csv(file_path)
 df_clean = df.dropna(
     subset=['título', 'rating', 'metascore', 'recaudación(M)']
 ).copy()
@@ -68,7 +80,13 @@ sns.barplot(
 axes[1, 1].set_title('Top 10 Directores por Recaudación Total ($M)')
 axes[1, 1].set_xlabel('Recaudación Total ($ Millones)')
 
+# Crear el directorio .screenshots si no existe
+os.makedirs('.screenshots', exist_ok=True)
+
 # Ajustar distribución y guardar
 plt.tight_layout()
-plt.savefig('.screenshots/analisis_peliculas_sin_warnings.png', dpi=300)
-# plt.show()
+output_path = '.screenshots/analisis_peliculas_sin_warnings.png'
+plt.savefig(output_path, dpi=300)
+plt.close(fig)
+
+print(f"Gráfico guardado exitosamente en: {output_path}")
