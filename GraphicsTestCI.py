@@ -11,7 +11,7 @@ import seaborn as sns
 sns.set_theme(style="whitegrid")
 
 # 1. Carga y limpieza inicial de datos (usando ruta relativa)
-file_path = 'Top-Películas.csv'
+file_path = 'TopPeliculas.csv'
 
 if not os.path.exists(file_path):
     raise FileNotFoundError(
