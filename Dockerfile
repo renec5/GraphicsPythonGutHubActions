@@ -20,4 +20,4 @@ RUN pip install --no-cache-dir -r requirements.txt || true
 COPY . .
 
 # 6. Ejecutar la app con Xvfb (Servidor de pantalla virtual para entornos headless/CI)
-CMD ["xvfb-run", "python", "main.py"]
+CMD ["xvfb-run", "python", "GraphicsTestCI.py"]
