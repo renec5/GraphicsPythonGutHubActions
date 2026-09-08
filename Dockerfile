@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     xvfb \
     libgl1 \
     libglib2.0-0 \
+    xauth \
     && rm -rf /var/lib/apt/lists/*
 
 # 3. Directorio de trabajo dentro del contenedor
